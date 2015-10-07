@@ -1,6 +1,7 @@
 
 <?php
 require 'tracking.class.Model.php';
+require 'tracking.class.Controller.php';
 class View
 {
     private $model;
@@ -13,6 +14,7 @@ class View
     public function output_view($model){
         //hacer view en la pantalla
         echo "estamos en View";
+
         print_r($model);
     }
 
@@ -21,52 +23,30 @@ class View
         return "<p>" . $this->model->string . "</p>";
     }
 }
-class Controller{
-    
-	private $model;
-	
-    function recoger(){
-           // print_r($nuevo);
-            //quien hace y que
-    }
-    function insertar(){
-        $pdo=new PDO('mysql:host=localhost;dbname=TEST','root','internet80');
-$timezone = date_default_timezone_get();
-//echo "The current server timezone is: " . $timezone;
-$date = date('m/d/Y h:i:s a', time());
-        if(!$pdo){
-	        die('could not connect' . PDO_error());
-	       
-}else{
-     $insert=$pdo->query("INSERT INTO `tracking`(`id_usuario`, `latitude`, `longitud`, `fecha`) VALUES ('$this->_usuario','$this->_latitude','$this->_longitud','$date')");
 
-}
-    }        
-    function mostrar(){
-            //quien hace y que
-    }
-}
 require 'tracking.html';
+
 extract($_POST);
 
 $newusu=new Model();
 $newusu->leer();
-echo $newusu->_usuario;
+echo $recoger_usuario;
+$recog=new Controller();
+$recog->recoger($recoger_usuario);
+print_r($recog);
 echo "<br>";
-
-if(empty($usuario)||empty($longitud)||empty($latitude)) {
+if(isset($_POST['submit'])||empty($usuario)||empty($longitude)||empty($latitude)) {
  		echo "<script language='javascript'>";
 		echo "alert('falta datos o datos incorectos !!!!')";
 		echo "</script>";
-		header('Refresh:1;URL=http://localhost/Aitor/TO_DO_/TO_DO_GIT/todoapp/Chris_todoapp/to_do_login.php');
-}else{}
+		//header('Refresh:1;URL=http://localhost/Aitor/.php');
+}else{
     $control=new Controller();
-    $control->insertar();
+    $control->insertar($newusu);
 	
 $print=new View();
 $print->output_view($newusu);
-$print->output_view($data);
-
+}
 //print_r($data);
 //$string=$newusu;
 
