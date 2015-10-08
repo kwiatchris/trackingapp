@@ -2,6 +2,7 @@
 <?php
 require 'tracking.class.Model.php';
 require 'tracking.class.Controller.php';
+require 'tracking.html';
 class View
 {
     private $model;
@@ -10,12 +11,22 @@ class View
     //     $this->controller = $controller;
     //     $this->model = $model;
     // }
-	
-    public function output_view($model){
+	public function output_view($model){
         //hacer view en la pantalla
         echo "estamos en View";
 
-        print_r($model);
+        //print_r($model);
+
+        foreach ($model as $res){//recoremos el resultado por filas adecuados[''] desde query $statement
+        echo'<tr>';
+        echo'<td>' ."usuario". $res['id_usuario']."</td>";echo "<br>"; 
+        echo'<td>' . "latitude". $res['latitude']."</td>";echo "<br>";
+        //echo'<td>' ."usuario: ". $res['id_usuario']."</td>";echo "<br>";
+                
+       // echo'<td>' . "la lista creada dia ". $res['fecha_creacion'].'</td>';echo "<br>";
+        echo'<tr>';
+        echo "<br>";echo "<br>";
+    }
     }
 
     public function output_map(){
@@ -23,30 +34,35 @@ class View
         return "<p>" . $this->model->string . "</p>";
     }
 }
-
-require 'tracking.html';
-
 extract($_POST);
-
+echo $submit;
 $newusu=new Model();
 $newusu->leer();
-echo $recoger_usuario;
+//echo $recoger_usuario;
 $recog=new Controller();
 $recog->recoger($recoger_usuario);
-print_r($recog);
+//print_r($recog);
 echo "<br>";
-if(isset($_POST['submit'])||empty($usuario)||empty($longitude)||empty($latitude)) {
- 		echo "<script language='javascript'>";
-		echo "alert('falta datos o datos incorectos !!!!')";
+//echo $submitbutton;
+echo $go;
+
+//echo $submitbutton;
+if(isset($_POST['go'])){
+    echo "button pressed";
+    if(empty($usuario)||empty($longitude)||empty($latitude)) {
+ 		echo "empty";
+        echo "<script language='javascript'>";
+		//echo "alert('falta datos o datos incorectos !!!!')";
 		echo "</script>";
 		//header('Refresh:1;URL=http://localhost/Aitor/.php');
 }else{
+    echo "insertamos";
     $control=new Controller();
     $control->insertar($newusu);
 	
-$print=new View();
-$print->output_view($newusu);
-}
+//$print=new View();
+//$print->output_view($newusu);
+}}
 //print_r($data);
 //$string=$newusu;
 

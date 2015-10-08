@@ -1,11 +1,14 @@
 <?php
+require 'tracking.class.Conexion.php';
 class Controller{
     private $pdo;
 	private $model;
     private $usu;
 	
     function recoger($usu){
-        $pdo=new PDO('mysql:host=localhost;dbname=TEST','root','internet80');
+        $modelo=new Conexion();
+$pdo=$modelo->conectar();
+       // $pdo=new PDO('mysql:host=localhost;dbname=TEST','root','internet80');
         if(!$pdo){
             die('could not connect' . PDO_error());
            
@@ -15,7 +18,7 @@ class Controller{
      $recoger=$pdo->query("SELECT * FROM `tracking` WHERE `id_usuario`='$usu'");
      $recoger->execute();
     $result= $recoger->fetchAll(PDO::FETCH_ASSOC);
-print_r($result);
+    //print_r($result);
 }
     }
     function insertar($model){
@@ -23,8 +26,13 @@ print_r($result);
 $timezone = date_default_timezone_get();
 //echo "The current server timezone is: " . $timezone;
 $date = date('m/d/Y h:i:s a', time());
+echo $timezone;
+$date = date('Y-m-d H:i:s');
+
 echo $date;echo "<br>";
-$pdo=new PDO('mysql:host=localhost;dbname=TEST','root','internet80');
+//$pdo=new PDO('mysql:host=localhost;dbname=TEST','root','internet80');
+$modelo=new Conexion();
+$pdo=$modelo->conectar();
         if(!$pdo){
 	        die('could not connect' . PDO_error());
 	       
@@ -39,4 +47,5 @@ $pdo=new PDO('mysql:host=localhost;dbname=TEST','root','internet80');
             //quien hace y que
     }
 }
-?>
+
+?> 
