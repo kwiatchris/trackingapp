@@ -2,6 +2,7 @@
 <?php
 require 'tracking.class.Model.php';
 require 'tracking.class.Controller.php';
+require 'tracking.calendar.html';
 require 'tracking.html';
 class View
 {
@@ -35,34 +36,41 @@ class View
     }
 }
 extract($_POST);
+echo $alternate;
 echo $submit;
 $newusu=new Model();
 $newusu->leer();
 //echo $recoger_usuario;
-$recog=new Controller();
-$recog->recoger($recoger_usuario);
+
 //print_r($recog);
 echo "<br>";
 //echo $submitbutton;
-echo $go;
+echo $go;echo "<br>";
 
 //echo $submitbutton;
-if(isset($_POST['go'])){
-    echo "button pressed";
+if(isset($_POST['insertar'])){
+   // echo "button pressed";echo "<br>";
     if(empty($usuario)||empty($longitude)||empty($latitude)) {
  		echo "empty";
         echo "<script language='javascript'>";
-		//echo "alert('falta datos o datos incorectos !!!!')";
+		echo "alert('falta datos o datos incorectos !!!!')";
 		echo "</script>";
 		//header('Refresh:1;URL=http://localhost/Aitor/.php');
 }else{
-    echo "insertamos";
+    //echo "insertamos";
     $control=new Controller();
     $control->insertar($newusu);
-	
-//$print=new View();
-//$print->output_view($newusu);
-}}
+    echo "la fila insertada";
+	//$print=new View();//$print->output_view($newusu);
+}
+}
+if(isset($_POST['recoger'])){
+    $recog=new Controller();
+    $recog->recoger($recoger_usuario);
+
+
+}
+
 //print_r($data);
 //$string=$newusu;
 
