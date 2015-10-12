@@ -67,5 +67,17 @@ $pdo=$modelo->conectar();
     $mostro->mostrar($result);
 }
     }
-}
+    function delete($id){
+
+        $modelo=new Conexion();
+        $pdo=$modelo->conectar();
+        if(!$pdo){
+            die('could not connect'.PDO_error());
+        }else{
+            $delete=$pdo->query("DELETE FROM `tracking` WHERE `id_tracking`='$id'");
+            $delete->execute();
+            echo "la fila se elimono corectamente";
+        }
+    }
+  }
  ?>

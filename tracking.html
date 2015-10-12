@@ -14,16 +14,16 @@
   // });
   $(function() {
     $( "#datepicker" ).datepicker({
-      altField: "#alternate",
-      //altFormat: "DD, d MM, yy"
+      altField: "#datepicker", //altFormat: "DD, d MM, yy"
       altFormat:"yy/mm/dd"
     });
   });
-
+// $('#table').find('tr').click( function(){
+//   alert('You clicked row '+ ($(this).index()+1) );
+// });
   </script>
 </head>
 <body>
-
     <form action="tracking.class.php" method="post">
         <input type="text" name="usuario"/>
         <input type="text" name="latitude"/>
@@ -32,17 +32,15 @@
          </form>
          <form action="tracking.class.php" method="post">
         <input type="text" name="recoger_usuario"/>
-        <input name="recoger" id="recoger"type="submit" value="recoger"/>
-        
-      <p>Date: <input name="datealternate" type="text" id="datepicker">
- <input type="text" name="alternate"id="alternate" size="30"></p>
+        <input name="recoger" id="recoger"type="submit" value="recoger"/>        
+      <p>Date: <input name="datealternate" type="text" id="datepicker" onchange="datepickerchange()"></p>
+ <!-- <input type="text" name="alternate"id="alternate" size="30"> -->
          </form>
-
- 
 </body>
 </html>
 <html>
     <body>
+    <p id="data"></p>
         <!-- <form action="tracking.class.php" method="post">
  <input name="recoger_fecha" id="recoger_fecha"type="submit" value="recoger_fecha"/>
         <input type="text" name="usuario"/>

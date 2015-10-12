@@ -38,10 +38,18 @@ class View
         echo '<td>' . $row['latitude'] . '  '.' '.'</td>';
         echo '<td>' . $row['longitude'] . '  '.'</td>';
          echo '<td>' . $row['fecha'] . '</td>';
+                       
+               //  echo '<td>'."<a href=http://localhost/Aitor/TRACKING%20APP/trackingapp/tracking.class.php?id=".$row['id_tracking'].'>'."CLICK</a>".'</td>';
+         //************************************link con la function, pasa el id y llama la function a href....*************
+        // echo '<td>'."<a href=tracking.class.php?action=callfunction&id=".$row['id_tracking'].">Click</a>".'</td>';
+         //************************************button con el link llamando la function ***********************
+         echo '<td>'."<a href=tracking.class.php?action=callfunction&id=".$row['id_tracking']."><input type='button' value='delete'></a>".'</td>';
+         //<input type="button" value="Put Your Text Here" onclick="window.location.href='http://www.hyperlinkcode.com/button-links.php'" />
         echo '</tr>';echo "<br>";
         echo '</table';
         
     }
     }
 }
-?>
+
+// ?>
