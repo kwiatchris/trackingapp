@@ -56,7 +56,10 @@ $pdo=$modelo->conectar();
         if(!$pdo){
             die('could not connect' . PDO_error());
 }else{echo "estamos en recoge fecha"; echo "<br>";
-   
+
+    //echo "<input type='button' value='delete ALL' "; echo "<br>";
+    echo '<td>'."<a href=tracking.class.php?action=callfunction&id=".$usu."&fecha=".$fecha."><input type='button' value='delete ALL'></a>".'</td>';
+
             //*********************esta select con la fecha*******************
     // idea hay q pasar en el metodo la variable $alternate !!!!!!!!!!!!!!!!!!!!!!111 
      $recoger=$pdo->query("SELECT * FROM `tracking` WHERE DATE(`fecha`) = '$fecha' and `id_usuario`='$usu'");
@@ -68,7 +71,6 @@ $pdo=$modelo->conectar();
 }
     }
     function delete($id){
-
         $modelo=new Conexion();
         $pdo=$modelo->conectar();
         if(!$pdo){
@@ -79,5 +81,18 @@ $pdo=$modelo->conectar();
             echo "la fila se elimono corectamente";
         }
     }
+    //*****************************buggy/////////////////////
+   //  function deleteconfecha($usu,$fecha){
+   // echo "estamos en deleteconfecha";
+   // $modelo=new Conexion();
+   // $pdo=$modelo->conectar();
+   // if(!$pdo){
+   //  die('could not connect'.PDO_error());
+   // }else{
+   //  $deleteconfecha=$pdo->("DELETE FROM `tracking` WHERE `id_usuario`='$usu' and `fecha`='$fecha' ");
+   //  $deleteconfecha->execute();
+   //  echo "se borro";
+   // }
+   //  }
   }
  ?>

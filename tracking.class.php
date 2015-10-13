@@ -55,9 +55,16 @@ $recog->recoger($recoger_usuario);
   //******************segunda forma llamamos a funkcion desde un link******************
   if($_GET['action'] == 'callfunction'){
      $id_track=$_GET['id'];
+     $fetcha_track=$_GET['fecha'];
+     //echo $fetcha_track;
   //echo $id_track;
+     if(!isset($fetcha_track)){
   $del=new Controller();
   $del->delete($id_track);
+}elseif(isset($fetcha_track)&&(isset($id_track))){
+  $delconfecha=new Controller();
+  $delconfecha->deleteconfecha($id_track,$fetcha_track);
+}
    }
 //print_r($data);
 //$string=$newusu;
