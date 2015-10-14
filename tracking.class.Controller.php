@@ -82,17 +82,22 @@ $pdo=$modelo->conectar();
         }
     }
     //*****************************buggy/////////////////////
-   //  function deleteconfecha($usu,$fecha){
-   // echo "estamos en deleteconfecha";
-   // $modelo=new Conexion();
-   // $pdo=$modelo->conectar();
-   // if(!$pdo){
-   //  die('could not connect'.PDO_error());
-   // }else{
-   //  $deleteconfecha=$pdo->("DELETE FROM `tracking` WHERE `id_usuario`='$usu' and `fecha`='$fecha' ");
-   //  $deleteconfecha->execute();
-   //  echo "se borro";
-   // }
-   //  }
+    function deleteconfecha($usu,$fecha){
+   echo "estamos en deleteconfecha";echo "<br>";
+   echo $usu;echo "<br>";
+   echo $fecha;
+   $modelo=new Conexion();
+    $pdo=$modelo->conectar();
+    if(!$pdo){
+     die('could not connect'.PDO_error());
+    }else{
+    $deleteconfecha=$pdo->query("DELETE FROM `tracking` WHERE `id_usuario`='$usu' and `fecha` BETWEEN '$fecha 00:00:00.00' AND '$fecha 23:59:59.999'
+");
+    $deleteconfecha->execute();
+    if($deleteconfecha){
+    echo "se borro todo corectamente";
+    }
+    }
+    }
   }
  ?>

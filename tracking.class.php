@@ -1,5 +1,6 @@
 
 <?php
+require 'vendor/autoload.php';
 require 'tracking.class.Model.php';
 require 'tracking.class.Controller.php';
 require 'tracking.class.View.php';
@@ -68,5 +69,11 @@ $recog->recoger($recoger_usuario);
    }
 //print_r($data);
 //$string=$newusu;
+\Slim\Slim::registerAutoloader();
 
+$app = new \Slim\Slim();
+$app->get('/hello/:name', function ($name) {
+    echo "Hello, $name";
+});
+$app->run();
 ?>
