@@ -5,48 +5,10 @@ require 'tracking.class.Model.php';
 require 'tracking.class.Controller.php';
 require 'tracking.class.View.php';
 require 'tracking.html';
-
 extract($_POST);
-echo $alternate;
-echo $submit;
-$newusu=new Model();
-$newusu->leer();
-//echo $recoger_usuario;
+// $newusu=new Model();
+// $newusu->leer();
 
-//print_r($recog);
-echo "<br>";
-//echo $submitbutton;
-echo $go;echo "<br>";
-
-//echo $submitbutton;
-if(isset($_POST['insertar'])){
-   // echo "button pressed";echo "<br>";
-    if(empty($usuario)||empty($longitude)||empty($latitude)) {
- 		echo "empty";
-        echo "<script language='javascript'>";
-		echo "alert('falta datos o datos incorectos !!!!')";
-		echo "</script>";
-		//header('Refresh:1;URL=http://localhost/Aitor/.php');
-}else{
-    //echo "insertamos";
-    $control=new Controller();
-    $control->insertar($newusu);
-    echo "la fila insertada";
-	//$print=new View();//$print->output_view($newusu);
-}
-}
-if(isset($_POST['recoger'])&&(!empty($datealternate))&&(!empty($recoger_usuario))){
-    $recog=new Controller();
-    //echo $recoger_usuario;
-    // echo $alternate;
-    //$recog->recoger($recoger_usuario);//*****************recoger sin fecha
-        $recog->recogerconfecha($recoger_usuario,$datealternate);
-    //echo $datealternate;
-        //echo $alternate;
-}elseif(isset($_POST['recoger'])&&(!empty($recoger_usuario))){
-$recog=new Controller();
-$recog->recoger($recoger_usuario);
-}
 //*******************dos formas a pasar el parametro con el link con el ID***********
  // $id_track=$_GET['id'];
  //  echo $id_track;
@@ -67,13 +29,35 @@ $recog->recoger($recoger_usuario);
   $delconfecha->deleteconfecha($id_track,$fetcha_track);
 }
    }
-//print_r($data);
-//$string=$newusu;
+
 \Slim\Slim::registerAutoloader();
 
 $app = new \Slim\Slim();
-$app->get('/hello/:name', function ($name) {
-    echo "Hello, $name";
+$app->get('/', function () {
+   echo "Hello SLIM!";
 });
+$app->post('/tracking.class.php/', function () use ($app) {
+  $username = $app->request->post('usuario'); 
+    echo "HTTP post, username: $usuario";
+});
+$app->post('/', function () use ($app) {
+  $usuario = $app->request->post('usuario'); 
+  $latitude = $app->request->post('latitude'); 
+  $longitude = $app->request->post('longitude'); 
+   $recoger_usuario = $app->request->post('recoger_usuario'); 
+ $datealternate=$app->request->post('datealternate');
+       
+       $nuevoslim=new Model();
+      $nuevoslim->_usuario=$usuario;
+      $nuevoslim->_latitude=$latitude;
+      $nuevoslim->_longitude=$longitude;
+      if($nuevoslim){ $control=new Controller();
+                      $control->insertar($nuevoslim);}
+     if(!$datealternate){$recog=new Controller();
+                        $recog->recoger($recoger_usuario);}
+     if($datealternate){$recogconf=new Controller();
+                        $recogconf->recogerconfecha($recoger_usuario,$datealternate);}
+});
+
 $app->run();
 ?>

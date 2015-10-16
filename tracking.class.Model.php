@@ -1,5 +1,5 @@
 <?php
-
+require 'vendor/autoload.php';
 class Model
 {
     public $_usuario;
@@ -10,9 +10,22 @@ class Model
               }
     
     function leer(){
-         $this->_usuario=$_POST['usuario'];
-         $this->_latitude=$_POST['latitude'];
-         $this->_longitude=$_POST['longitude'];
+        \Slim\Slim::registerAutoloader();
+
+$app = new \Slim\Slim();
+       $app->post('/', function () use ($app) {
+  $usuario = $app->request->post('usuario'); 
+  $latitude = $app->request->post('latitude'); 
+  $longitude = $app->request->post('longitude'); 
+    echo " SLIM username: $usuario";
+     echo " SLIM username: $latitude";
+     echo " SLIM username: $longitude";
+     
+      // $nuevoslim->_usuario=$usuario;
+      // $nuevoslim->_latitude=$latitude;
+      // $nuevoslim->_longitude=$longitude;
+      
+});
             //loop de usuario con todos puntos guardados
     }
 }

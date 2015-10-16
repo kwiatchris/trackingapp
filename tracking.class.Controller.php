@@ -47,6 +47,7 @@ $pdo=$modelo->conectar();
    // echo $model->_usuario;echo "<br>";
      $insert=$pdo->query("INSERT INTO `tracking`(`id_usuario`, `latitude`, `longitude`, `fecha`) VALUES ('$model->_usuario','$model->_latitude','$model->_longitude','$date');");
 //if($insert){echo "echo"};
+     if($insert){echo "la fila insertada";}
 }
     }        
     function recogerconfecha($usu,$fecha){
@@ -83,10 +84,8 @@ $pdo=$modelo->conectar();
     }
     //*****************************buggy/////////////////////
     function deleteconfecha($usu,$fecha){
-   echo "estamos en deleteconfecha";echo "<br>";
-   echo $usu;echo "<br>";
-   echo $fecha;
-   $modelo=new Conexion();
+   echo "estamops en deleteconfecha";echo "<br>";
+     $modelo=new Conexion();
     $pdo=$modelo->conectar();
     if(!$pdo){
      die('could not connect'.PDO_error());
