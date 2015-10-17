@@ -10,9 +10,7 @@ class View
 	public function output_view($model){
         //hacer view en la pantalla
         echo "estamos en View";
-
         //print_r($model);
-
         foreach ($model as $res){//recoremos el resultado por filas adecuados[''] desde query $statement
         echo'<tr>';
         echo'<td>' ."usuario". $res['id_usuario']."</td>";echo "<br>"; 
@@ -31,7 +29,8 @@ class View
     }
     public function mostrar($obj){
          foreach ($obj as $row) 
-    {   echo '<table border=3>';
+    {   
+        echo '<table border=3; border-radius:10px;font-family:raleway;font-size:16px;>';
         echo '<tr>';
         echo '<td>' . $row['id_tracking'] .'    '.' '. '</td>';
         echo '<td>' . $row['id_usuario'] .'    '.' '. '</td>';
@@ -47,6 +46,7 @@ class View
          //<input type="button" value="Put Your Text Here" onclick="window.location.href='http://www.hyperlinkcode.com/button-links.php'" />
         echo '</tr>';echo "<br>";
         echo '</table';
+       
         
     }
     }

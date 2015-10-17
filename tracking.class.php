@@ -1,24 +1,18 @@
 
 <?php
-require 'vendor/autoload.php';
+session_start();
+$id_usuario_sesion=$_SESSION['login_user'];
+echo "hello ".$id_usuario_sesion;
 require 'tracking.class.Model.php';
 require 'tracking.class.Controller.php';
 require 'tracking.class.View.php';
 require 'tracking.html';
-
+//require 'tracking.login.html';
 extract($_POST);
-echo $alternate;
-echo $submit;
-$newusu=new Model();
-$newusu->leer();
-//echo $recoger_usuario;
+ $newusu=new Model();
+ $newusu->leer();
+echo "<br>";echo "<br>";
 
-//print_r($recog);
-echo "<br>";
-//echo $submitbutton;
-echo $go;echo "<br>";
-
-//echo $submitbutton;
 if(isset($_POST['insertar'])){
    // echo "button pressed";echo "<br>";
     if(empty($usuario)||empty($longitude)||empty($latitude)) {
@@ -28,7 +22,6 @@ if(isset($_POST['insertar'])){
 		echo "</script>";
 		//header('Refresh:1;URL=http://localhost/Aitor/.php');
 }else{
-    //echo "insertamos";
     $control=new Controller();
     $control->insertar($newusu);
     echo "la fila insertada";
@@ -37,9 +30,7 @@ if(isset($_POST['insertar'])){
 }
 if(isset($_POST['recoger'])&&(!empty($datealternate))&&(!empty($recoger_usuario))){
     $recog=new Controller();
-    //echo $recoger_usuario;
-    // echo $alternate;
-    //$recog->recoger($recoger_usuario);//*****************recoger sin fecha
+     //$recog->recoger($recoger_usuario);//*****************recoger sin fecha
         $recog->recogerconfecha($recoger_usuario,$datealternate);
     //echo $datealternate;
         //echo $alternate;
@@ -57,23 +48,43 @@ $recog->recoger($recoger_usuario);
   if($_GET['action'] == 'callfunction'){
      $id_track=$_GET['id'];
      $fetcha_track=$_GET['fecha'];
-     //echo $fetcha_track;
-  //echo $id_track;
      if(!isset($fetcha_track)){
-  $del=new Controller();
-  $del->delete($id_track);
+          $del=new Controller();
+          $del->delete($id_track);
 }elseif(isset($fetcha_track)&&(isset($id_track))){
-  $delconfecha=new Controller();
-  $delconfecha->deleteconfecha($id_track,$fetcha_track);
-}
-   }
-//print_r($data);
-//$string=$newusu;
-\Slim\Slim::registerAutoloader();
+          $delconfecha=new Controller();
+          $delconfecha->deleteconfecha($id_track,$fetcha_track);
+                                                }
+                                      }
+if(isset($_POST['signup'])){
+ if(empty($login)||empty($nombre)||empty($password)||!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    echo "<script language='javascript'>";
+    echo "alert('falta datos o datos incorectos !!!!')";
+    echo "</script>";
+    }else{
+      $passmd5 = md5($password);
+      //echo $passmd5;
+      $crearusu=new Controller();
+      $crearusu->crearusuario($login,$nombre,$passmd5,$email);
+      }
+    }
 
-$app = new \Slim\Slim();
-$app->get('/hello/:name', function ($name) {
-    echo "Hello, $name";
-});
-$app->run();
+ // Starting Session
+if (isset($_POST['login'])) {
+if (empty('username') || empty('password')) {
+$error = "Username or Password is invalid";
+}else
+{
+// Define $username and $password
+$username=$_POST['username'];
+$password=$_POST['password'];
+$passmd5 = md5($password);
+ $trylogin=new Controller();
+ $trylogin->login($username,$passmd5);
+echo $trylogin;
+}
+}
+echo "<a href=tracking.logout.php"."><input type='button' value=' LOGOUT '></a>";
+
+
 ?>
