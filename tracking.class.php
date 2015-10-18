@@ -7,6 +7,7 @@ require 'tracking.class.Model.php';
 require 'tracking.class.Controller.php';
 require 'tracking.class.View.php';
 require 'tracking.html';
+//require 'tracking.class.Extracting.Map.php';
 //require 'tracking.login.html';
 extract($_POST);
  $newusu=new Model();
@@ -84,6 +85,8 @@ $passmd5 = md5($password);
 echo $trylogin;
 }
 }
+$extrac=new Controller();
+$extrac->extract();
 echo "<a href=tracking.logout.php"."><input type='button' value=' LOGOUT '></a>";
 
 
