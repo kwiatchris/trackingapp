@@ -44,7 +44,8 @@
  function initMap() {
  map = new google.maps.Map(document.getElementById("map"), {
  center: new google.maps.LatLng(0, 0),
- zoom: 14,
+
+ zoom: 10,
  mapTypeId: google.maps.MapTypeId.ROADMAP,
  mapTypeControl: false,
  mapTypeControlOptions: {
@@ -58,9 +59,11 @@
 
  center = bounds.getCenter();
  map.fitBounds(bounds);
+ 
  //**************************hacer boocle con for each en php***********
- addMarker("43.320101","-1.9834367999999358","andia 5");
- addMarker("43.3237","-1.9793","kursal");
+ //addMarker("43.320101","-1.9834367999999358","andia 5");
+ //addMarker("43.3237","-1.9793","kursal");
+ //addMarker("43.3169218", "-1.9836272999999665","san martin");
 
  }
  </script>

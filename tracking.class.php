@@ -6,7 +6,7 @@ echo "hello ".$id_usuario_sesion;
 require 'tracking.class.Model.php';
 require 'tracking.class.Controller.php';
 //require 'tracking.class.View.php';
-require 'map.html';
+
 require 'tracking.html';
 //require 'tracking.class.Extracting.Map.php';
 //require 'tracking.login.html';
@@ -14,9 +14,7 @@ extract($_POST);
  $newusu=new Model();
  $newusu->leer();
 echo "<br>";echo "<br>";
-$extrac=new Controller();
-$extrac->extract();
-echo "<a href=tracking.logout.php"."><input type='button' value=' LOGOUT '></a>";
+
 if(isset($_POST['insertar'])){
    // echo "button pressed";echo "<br>";
     if(empty($usuario)||empty($longitude)||empty($latitude)) {
@@ -60,6 +58,14 @@ $recog->recoger($recoger_usuario);
           $delconfecha->deleteconfecha($id_track,$fetcha_track);
                                                 }
                                       }
+
+  if($_GET['action'] == 'mapamostrar'){
+    $content = json_decode($_GET['data']);
+    $map=new Controller();
+    $map->extract();
+    print_r($content);
+    echo "mapamostrar";
+  } 
 if(isset($_POST['signup'])){
  if(empty($login)||empty($nombre)||empty($password)||!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     echo "<script language='javascript'>";
@@ -88,7 +94,9 @@ $passmd5 = md5($password);
 echo $trylogin;
 }
 }
-
+//$extrac=new Controller();
+//$extrac->extract();
+echo "<a href=tracking.logout.php"."><input type='button' value=' LOGOUT '></a>";
 
 
 ?>

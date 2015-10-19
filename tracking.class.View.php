@@ -36,19 +36,26 @@ class View
         echo '<td>' . $row['id_usuario'] .'    '.' '. '</td>';
         echo '<td>' . $row['latitude'] . '  '.' '.'</td>';
         echo '<td>' . $row['longitude'] . '  '.'</td>';
-         echo '<td>' . $row['fecha'] . '</td>';
+        echo '<td>' . $row['fecha'] . '</td>';
                        
                //  echo '<td>'."<a href=http://localhost/Aitor/TRACKING%20APP/trackingapp/tracking.class.php?id=".$row['id_tracking'].'>'."CLICK</a>".'</td>';
          //************************************link con la function, pasa el id y llama la function a href....*************
         // echo '<td>'."<a href=tracking.class.php?action=callfunction&id=".$row['id_tracking'].">Click</a>".'</td>';
          //************************************button con el link llamando la function ***********************
          echo '<td>'."<a href=tracking.class.php?action=callfunction&id=".$row['id_tracking']."><input type='button' value='delete'></a>".'</td>';
+         echo '<td>'."<a href=tracking.class.php?action=mapamostrar&datos=".json_encode($obj)."><input type='button' value=' MAP' ></a>".'</td>';
          //<input type="button" value="Put Your Text Here" onclick="window.location.href='http://www.hyperlinkcode.com/button-links.php'" />
         echo '</tr>';echo "<br>";
         echo '</table';
-       
-        
-    }
+       }
+//        The best way to do that is to use json_encode():
+
+// file_get_contents('http://www.example.com/script.php?data='.json_encode($object));
+// on the other side:
+
+// $content = json_decode($_GET['data']);
+    
+    //echo "<a href=tracking.logout.php"."><input type='button' value=' LOGOUT '></a>";
     }
 }
 

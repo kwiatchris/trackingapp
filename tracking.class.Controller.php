@@ -2,6 +2,7 @@
 session_start();
 require 'tracking.class.Conexion.php';
 require 'tracking.class.View.php';
+
 class Controller{
     private $pdo;
     private $model;
@@ -125,11 +126,11 @@ class Controller{
                     $pdo=$modelo->conectar();
         if(!$pdo){
                      die('could not connect'.PDO_error());
-                        }else{
-                            $datos=$pdo->query("SELECT * FROM `tracking` ");
-                            echo "extract";
-                            $datos->execute();
-                            $result=$datos->fetchAll(PDO::FETCH_ASSOC);
+                        }else{header("location: map.html");
+                        
+                            //$datos=$pdo->query("SELECT * FROM `tracking` ");
+                            //$datos->execute();
+                            //$result=$datos->fetchAll(PDO::FETCH_ASSOC);
                             //print_r($result);
                               foreach ($result as $rw) {
                             echo $rw['id_tracking'];
@@ -137,24 +138,10 @@ class Controller{
                             echo $rw['longitude'];
                             echo "<br>";
                          }
-                            $mostro=new View();
-                            $mostro->mostrar($result);
-                           
-
-                                //**********************no va****************
-                               // $row = $stmt->fetch(PDO::FETCH_ASSOC);
-                               // echo $row;
-    //                             while($row = $result->fetch(PDO::FETCH_ASSOC)) {
-    // // do loop stuff$usu=$row['id_usuario'];
-    //                      echo $usu;
-    //                      $lat=$row['latitude'];
-    //                      $lon=$row['longitude'];
-    //                      $fecha=$row['fecha'];
-    //                      echo $fecha;
-    //                     echo ("addMarker($lat, $lon,'<b>$usu</b><br/>$fecha');\n");
+                         //  echo ("addMarker($lat, $lon,'<b>$usu</b><br/>$fecha');\n");
     //                           }
                         
-                            }
+                            }addMarker("43.3169218", "-1.9836272999999665","san martin");
                                  } 
 
                 }
