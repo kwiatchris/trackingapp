@@ -1,7 +1,7 @@
 <?php
 session_start();
 require 'tracking.class.Conexion.php';
-
+require 'tracking.class.View.php';
 class Controller{
     private $pdo;
     private $model;
@@ -121,7 +121,7 @@ class Controller{
                       }
                     }
                     function extract(){
-         $modelo=new Conexion();
+                    $modelo=new Conexion();
                     $pdo=$modelo->conectar();
         if(!$pdo){
                      die('could not connect'.PDO_error());
@@ -131,24 +131,29 @@ class Controller{
                             $datos->execute();
                             $result=$datos->fetchAll(PDO::FETCH_ASSOC);
                             //print_r($result);
-                            $mostro=new View();
-                                $mostro->mostrar($result);
-                                //**********************no va****************
-                                $row = $stmt->fetch(PDO::FETCH_ASSOC);
-                                echo $row;
-                                while($row = $result->fetch(PDO::FETCH_ASSOC)) {
-    // do loop stuff$usu=$row['id_usuario'];
-                         echo $usu;
-                         $lat=$row['latitude'];
-                         $lon=$row['longitude'];
-                         $fecha=$row['fecha'];
-                         echo $fecha;
-                        echo ("addMarker($lat, $lon,'<b>$usu</b><br/>$fecha');\n");
-                              }
-                         foreach ($res as $row) {
-                            print_r($row['id_tracking']);
+                              foreach ($result as $rw) {
+                            echo $rw['id_tracking'];
+                            echo $rw['latitude'];
+                            echo $rw['longitude'];
+                            echo "<br>";
                          }
+                            $mostro=new View();
+                            $mostro->mostrar($result);
+                           
 
+                                //**********************no va****************
+                               // $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                               // echo $row;
+    //                             while($row = $result->fetch(PDO::FETCH_ASSOC)) {
+    // // do loop stuff$usu=$row['id_usuario'];
+    //                      echo $usu;
+    //                      $lat=$row['latitude'];
+    //                      $lon=$row['longitude'];
+    //                      $fecha=$row['fecha'];
+    //                      echo $fecha;
+    //                     echo ("addMarker($lat, $lon,'<b>$usu</b><br/>$fecha');\n");
+    //                           }
+                        
                             }
                                  } 
 
