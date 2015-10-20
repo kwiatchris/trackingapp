@@ -28,6 +28,8 @@ class View
         return "<p>" . $this->model->string . "</p>";
     }
     public function mostrar($obj){
+       // $post_data = json_encode(array('item' => $obj),JSON_FORCE_OBJECT);
+        $datos=json_encode($obj);
          foreach ($obj as $row) 
     {   
         echo '<table border=3; border-radius:10px;font-family:raleway;font-size:16px;>';
@@ -43,7 +45,7 @@ class View
         // echo '<td>'."<a href=tracking.class.php?action=callfunction&id=".$row['id_tracking'].">Click</a>".'</td>';
          //************************************button con el link llamando la function ***********************
          echo '<td>'."<a href=tracking.class.php?action=callfunction&id=".$row['id_tracking']."><input type='button' value='delete'></a>".'</td>';
-         echo '<td>'."<a href=tracking.class.php?action=mapamostrar&datos=".json_encode($obj)."><input type='button' value=' MAP' ></a>".'</td>';
+         echo '<td>'."<a href=map.php?action=mapamostrar&datos=".$datos."><input type='button' value=' MAP' ></a>".'</td>';
          //<input type="button" value="Put Your Text Here" onclick="window.location.href='http://www.hyperlinkcode.com/button-links.php'" />
         echo '</tr>';echo "<br>";
         echo '</table';

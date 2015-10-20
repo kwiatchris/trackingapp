@@ -59,12 +59,26 @@
 
  center = bounds.getCenter();
  map.fitBounds(bounds);
- 
+ <?php
+  $content = json_decode($_GET['datos']);
+  //$dato=$_GET['datos'];
+  //echo $dato;
+ // $diferente=(json_decode($_GET['datos'], true));
+  
+      while ($content) {
+   	
+		 $lat=$content['latitude'];
+		 $lon=$content['longitude'];
+
+ echo ("addMarker($lat, $lon,'<b>$name</b><br/>$desc');\n");
+    } 
+echo ("addMarker(43.3238,-1.98511,'<b>$name</b><br/>$desc');\n");
+
  //**************************hacer boocle con for each en php***********
  //addMarker("43.320101","-1.9834367999999358","andia 5");
  //addMarker("43.3237","-1.9793","kursal");
  //addMarker("43.3169218", "-1.9836272999999665","san martin");
-
+?>
  }
  </script>
  </head>
