@@ -1,4 +1,5 @@
 <?php
+session_start();
 class View
 {
     private $model;
@@ -29,6 +30,7 @@ class View
     }
     public function mostrar($obj){
        // $post_data = json_encode(array('item' => $obj),JSON_FORCE_OBJECT);
+        $_SESSION['puntos'] = $obj;
         $datos=json_encode($obj);
          foreach ($obj as $row) 
     {   
@@ -45,7 +47,7 @@ class View
         // echo '<td>'."<a href=tracking.class.php?action=callfunction&id=".$row['id_tracking'].">Click</a>".'</td>';
          //************************************button con el link llamando la function ***********************
          echo '<td>'."<a href=tracking.class.php?action=callfunction&id=".$row['id_tracking']."><input type='button' value='delete'></a>".'</td>';
-         echo '<td>'."<a href=map.php?action=mapamostrar&datos=".$datos."><input type='button' value=' MAP' ></a>".'</td>';
+         echo '<td>'."<a href=map.php?action=mapamostrar&datos=".$obj."><input type='button' value=' MAP' ></a>".'</td>';
          //<input type="button" value="Put Your Text Here" onclick="window.location.href='http://www.hyperlinkcode.com/button-links.php'" />
         echo '</tr>';echo "<br>";
         echo '</table';
