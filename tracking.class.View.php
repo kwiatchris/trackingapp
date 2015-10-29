@@ -17,17 +17,12 @@ class View
         echo'<td>' ."usuario". $res['id_usuario']."</td>";echo "<br>"; 
         echo'<td>' . "latitude". $res['latitude']."</td>";echo "<br>";
         //echo'<td>' ."usuario: ". $res['id_usuario']."</td>";echo "<br>";
-                
-       // echo'<td>' . "la lista creada dia ". $res['fecha_creacion'].'</td>';echo "<br>";
+        // echo'<td>' . "la lista creada dia ". $res['fecha_creacion'].'</td>';echo "<br>";
         echo'<tr>';
         echo "<br>";echo "<br>";
     }
     }
 
-    public function output_map(){
-        //hacer view en la mapa de google
-        return "<p>" . $this->model->string . "</p>";
-    }
     public function mostrar($obj){
        // $post_data = json_encode(array('item' => $obj),JSON_FORCE_OBJECT);
         $_SESSION['puntos'] = $obj;
@@ -40,9 +35,8 @@ class View
         echo '<td>' . $row['id_usuario'] .'    '.' '. '</td>';
         echo '<td>' . $row['latitude'] . '  '.' '.'</td>';
         echo '<td>' . $row['longitude'] . '  '.'</td>';
-        echo '<td>' . $row['fecha'] . '</td>';
-                       
-               //  echo '<td>'."<a href=http://localhost/Aitor/TRACKING%20APP/trackingapp/tracking.class.php?id=".$row['id_tracking'].'>'."CLICK</a>".'</td>';
+        echo '<td>' . $row['fecha'] . '</td>';       
+          //  echo '<td>'."<a href=http://localhost/Aitor/TRACKING%20APP/trackingapp/tracking.class.php?id=".$row['id_tracking'].'>'."CLICK</a>".'</td>';
          //************************************link con la function, pasa el id y llama la function a href....*************
         // echo '<td>'."<a href=tracking.class.php?action=callfunction&id=".$row['id_tracking'].">Click</a>".'</td>';
          //************************************button con el link llamando la function ***********************
@@ -53,14 +47,10 @@ class View
         echo '</table';
        }
 //        The best way to do that is to use json_encode():
-
 // file_get_contents('http://www.example.com/script.php?data='.json_encode($object));
 // on the other side:
-
 // $content = json_decode($_GET['data']);
-    
-    //echo "<a href=tracking.logout.php"."><input type='button' value=' LOGOUT '></a>";
+//echo "<a href=tracking.logout.php"."><input type='button' value=' LOGOUT '></a>";
     }
 }
-
-// ?>
+?>

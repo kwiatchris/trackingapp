@@ -2,7 +2,7 @@
 session_start();
 require 'tracking.class.Conexion.php';
 require 'tracking.class.View.php';
-
+include 'tracking.class.Confirmation.email.php';
 class Controller{
     private $pdo;
     private $model;
@@ -100,7 +100,10 @@ class Controller{
                 $userid= $pdo->lastInsertId();
                 $confirm = $pdo->query("INSERT INTO `confirm` VALUES(NULL,'$userid','$key','$ema')");
                           }
-            if($crearusu&&$confirm){header("location: tracking.login.html");}
+            if($crearusu&&$confirm){
+                $con_email=new Confirmation();
+                $confirmation=$con_email->email_confirm($nom,$key,$ema);
+              header("location: tracking.login.html");}
                                                 }
     function login($log,$pass){
           $modelo=new Conexion();
@@ -121,24 +124,7 @@ class Controller{
                                }
                       }
                     }
-                    function extract(){
-                    $modelo=new Conexion();
-                    $pdo=$modelo->conectar();
-        if(!$pdo){
-                     die('could not connect'.PDO_error());
-                        }else{header("location: map.html");
-                         //  foreach ($result as $rw) {
-                         //    echo $rw['id_tracking'];
-                         //    echo $rw['latitude'];
-                         //    echo $rw['longitude'];
-                         //    echo "<br>";
-                         // }
-                         //  echo ("addMarker($lat, $lon,'<b>$usu</b><br/>$fecha');\n");
-    //                           }
-                        
-                            }addMarker("43.3169218", "-1.9836272999999665","san martin");
-                                 } 
-
+                    function extract(){     header("location: map.html");} 
                 }
 
  ?>

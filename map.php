@@ -62,21 +62,14 @@
  <?php
  session_start();
   $contentido = json_decode($_GET['datos']);
-  //$dato=$_GET['datos'];
-  //echo $dato;
- // $diferente=(json_decode($_GET['datos'], true));
-  //$puntos=$_GET['datos'];
+  //********** datos recogido pasando el objeto por $_SESSION
    $puntos=$_SESSION['puntos'];
         foreach ($puntos as $key ) {
            $lat=$key['latitude'];
     		$lon=$key['longitude'];
  echo ("addMarker($lat, $lon,'<b>$name</b><br/>$desc');\n");
     }
- //**************************hacer boocle con for each en php***********
- //addMarker("43.320101","-1.9834367999999358","andia 5");
- //addMarker("43.3237","-1.9793","kursal");
- //addMarker("43.3169218", "-1.9836272999999665","san martin");
-?>
+ ?>
  }
  </script>
  </head>

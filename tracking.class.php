@@ -1,16 +1,20 @@
+
 <?php
 session_start();
 $id_usuario_sesion=$_SESSION['login_user'];
-if($id_usuario_sesion){echo "hello ".$id_usuario_sesion;}else{header("Location:tracking.login.html");}
-
+echo "hello ".$id_usuario_sesion;
 require 'tracking.class.Model.php';
 require 'tracking.class.Controller.php';
 //require 'tracking.class.View.php';
+
 require 'tracking.html';
+//require 'tracking.class.Extracting.Map.php';
+//require 'tracking.login.html';
 extract($_POST);
  $newusu=new Model();
  $newusu->leer();
 echo "<br>";echo "<br>";
+
 if(isset($_POST['insertar'])){
    // echo "button pressed";echo "<br>";
     if(empty($usuario)||empty($longitude)||empty($latitude)) {
@@ -18,7 +22,8 @@ if(isset($_POST['insertar'])){
         echo "<script language='javascript'>";
 		echo "alert('falta datos o datos incorectos !!!!')";
 		echo "</script>";
-	}else{
+		//header('Refresh:1;URL=http://localhost/Aitor/.php');
+}else{
     $control=new Controller();
     $control->insertar($newusu);
     echo "la fila insertada";
@@ -29,6 +34,8 @@ if(isset($_POST['recoger'])&&(!empty($datealternate))&&(!empty($recoger_usuario)
     $recog=new Controller();
      //$recog->recoger($recoger_usuario);//*****************recoger sin fecha
         $recog->recogerconfecha($recoger_usuario,$datealternate);
+    //echo $datealternate;
+        //echo $alternate;
 }elseif(isset($_POST['recoger'])&&(!empty($recoger_usuario))){
 $recog=new Controller();
 $recog->recoger($recoger_usuario);
@@ -56,7 +63,7 @@ $recog->recoger($recoger_usuario);
     $content = json_decode($_GET['data']);
     $map=new Controller();
     $map->extract();
-    print_r($content);
+    
     echo "mapamostrar";
   } 
 if(isset($_POST['signup'])){
@@ -71,6 +78,7 @@ if(isset($_POST['signup'])){
       $crearusu->crearusuario($login,$nombre,$passmd5,$email);
       }
     }
+
  // Starting Session
 if (isset($_POST['login'])) {
 if (empty('username') || empty('password')) {
@@ -86,5 +94,9 @@ $passmd5 = md5($password);
 echo $trylogin;
 }
 }
+//$extrac=new Controller();
+//$extrac->extract();
+echo "<a href=tracking.logout.php"."><input type='button' value=' LOGOUT '></a>";
+
 
 ?>
