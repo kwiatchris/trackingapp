@@ -127,17 +127,12 @@ class Controller{
         if(!$pdo){
                      die('could not connect'.PDO_error());
                         }else{header("location: map.html");
-                        
-                            //$datos=$pdo->query("SELECT * FROM `tracking` ");
-                            //$datos->execute();
-                            //$result=$datos->fetchAll(PDO::FETCH_ASSOC);
-                            //print_r($result);
-                              foreach ($result as $rw) {
-                            echo $rw['id_tracking'];
-                            echo $rw['latitude'];
-                            echo $rw['longitude'];
-                            echo "<br>";
-                         }
+                         //  foreach ($result as $rw) {
+                         //    echo $rw['id_tracking'];
+                         //    echo $rw['latitude'];
+                         //    echo $rw['longitude'];
+                         //    echo "<br>";
+                         // }
                          //  echo ("addMarker($lat, $lon,'<b>$usu</b><br/>$fecha');\n");
     //                           }
                         
