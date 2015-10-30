@@ -112,7 +112,7 @@ class Controller{
                       die('could not connect'.PDO_error());
                       }else{
                         
-                        $searchusu=$pdo->query("select * from users where password='$pass' AND login='$log'");
+                        $searchusu=$pdo->query("select * from users where password='$pass' AND login='$log' and `active`=1");
                         $searchusu->execute();
                         $result=$searchusu->fetchAll(PDO::FETCH_ASSOC);
                         if ($result) {

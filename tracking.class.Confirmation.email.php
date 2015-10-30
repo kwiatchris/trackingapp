@@ -13,7 +13,8 @@ public function __construct(){
             
         }
 	function email_confirm($nombre,$key,$correo){
-				 $mail = new PHPMailer();
+        //$link='"localhost/Aitor/TRACKING%20APP/trackingapp/confirmar.php?email="'.$correo."&key="."$key"';
+        	 $mail = new PHPMailer();
             $mail->isSMTP();
             $mail->SMTPAuth = true;
             //$mail->SMTPSecure = "ssl";
@@ -22,11 +23,16 @@ public function __construct(){
             $mail->Username = "kwiatchris@outlook.com";
             $mail->Password = "internet80";
             $mail->From = "kwiatchris@outlook.com";
-            $mail->FromName = "CHRIS";
+            $mail->FromName = "Tracking App";
             $mail->Subject = "Bienvenido a App Tracking";
             $mail->AltBody = "Mensaje de prueba";
-            $mail->msgHTML("<h1>Mensaje de Bienvenida</h1><br/><br/><p>Gracias por incribirse en la app <b>App Tracking</b></p><br/>
-                <p>Su nombre de usuario: ".$nombre."</p>Su clave: ".$key);
+            $mail->msgHTML("<h1>Mensaje de Bienvenida</h1><br/><br/><p>
+                Hola <b>".$nombre."</b><br>Gracias por incribirse en la <b>Tracking App</b></p><br/>
+                <p>Debes activar tu cuenta pulsando este enlace 
+                :<a href='http://localhost/Aitor/TRACKING%20APP/trackingapp/confirmar.php?email=".$correo."&key=".$key."'>pulsa aqui para activar la cuenta</a></p>");
+                         //<a href="http://www.w3schools.com">Visit W3Schools</a>
+                        // echo '<td>'."<a href=map.php?action=mapamostrar&datos=".$obj."><input type='button' value=' MAP' ></a>".'</td>';
+                    //echo "<a href='".$link_address."'>Link</a>";
             $mail->addAddress($correo,$nombre);
             $mail->isHTML(true);
             if (!$mail->send()) {
