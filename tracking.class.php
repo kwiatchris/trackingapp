@@ -2,6 +2,8 @@
 <?php
 session_start();
 $id_usuario_sesion=$_SESSION['login_user'];
+$token=$_SESSION['access_token'];
+var_dump($token);
 echo "hello ".$id_usuario_sesion;
 require 'tracking.class.Model.php';
 require 'tracking.class.Controller.php';
