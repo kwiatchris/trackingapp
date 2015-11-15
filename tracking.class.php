@@ -1,14 +1,12 @@
-
 <?php
 session_start();
 $id_usuario_sesion=$_SESSION['login_user'];
 $token=$_SESSION['access_token'];
-var_dump($token);
-echo "hello ".$id_usuario_sesion;
+//var_dump($token);
+if($id_usuario_sesion){
+echo "hello ".$id_usuario_sesion;}
 require 'tracking.class.Model.php';
 require 'tracking.class.Controller.php';
-//require 'tracking.class.View.php';
-
 require 'tracking.html';
 //require 'tracking.class.Extracting.Map.php';
 //require 'tracking.login.html';
@@ -98,7 +96,7 @@ echo $trylogin;
 }
 //$extrac=new Controller();
 //$extrac->extract();
-echo "<a href=tracking.logout.php"."><input type='button' value=' LOGOUT '></a>";
+//echo "<a href=tracking.logout.php"."><input type='button' value=' LOGOUT '></a>";
 
 
 ?>

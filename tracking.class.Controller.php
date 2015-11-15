@@ -119,7 +119,7 @@ class Controller{
                       $_SESSION['login_user']=$log;
                            // Initializing Session
                                header("location: tracking.class.php"); // Redirecting To Other Page
-                               } else {header("location: tracking.login.html"); echo "false";
+                               } else {header("location: index.php"); echo "false";
                               // $error = "Username or Password is invalid";
                                }
                       }
